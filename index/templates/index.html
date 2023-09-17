@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/micss.css' %}">
+
+{% include "section/head.html" %}
+
+<body>
+{% include "section/header.html" %}
+
+    <div class="section cc-store-home-wrap home">
+        <div class="intro-header">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <div class="heading-jumbo">Bienvenido a InstaTool<br /></div>
+                    <div class="paragraph-bigger cc-bigger-light">Donde podrás tener el control total de tus publicaciones, crecer en redes sociales y además ahorrar tiempo.<br /></div>
+                </div><a href="{% url 'register' %}" class="button cc-white-button w-inline-block" id="botonLogin">
+                    <div>Unete</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    {% if registro == 'exito' %}
+        {% include "alerts/registroexito.html" %}
+    {% elif error == 'wrongcredenciales' %}
+        {% include "alerts/wrongcredenciales.html" %}
+    {% endif %}
+
+    {% if login == 'error' %}
+        {% include "alerts/wrongcredenciales.html" %}
+    {% endif %}
+    
+
+    <div class="section register">
+        <h1 class="heading-2 iniciarsesion">Iniciar sesión</h1>
+        <div class="container cc-heading-wrap register">
+            <div class="form-block-2 w-form">
+
+                <form  method="POST" action="{% url 'loginUser' %}">
+                    
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                        <label for="name">Correo electrónico</label><input type="text" class="text-field-2 w-input"
+                        maxlength="256" name="username"  placeholder="" required="true" email="true"/><label for="email"
+                        class="field-label">Contraseña</label>
+                        
+                        <input type="password" class="text-field-4 w-input"
+                        maxlength="256" name="password" data-name="Email" placeholder="" required="true" /><label for="name-2">O inica sesión con:</label>
+                    <div class="section-2 wf-section">
+
+                        <a href="{% url 'social:begin' 'google-oauth2' %}">
+                            <button type="button" id="loginGoogle" class="login-Google"><p>Google</p><img src="{% static 'img/googleLogo.png' %}" alt="" width="30"></button>
+                        </a>    
+                        
+
+                    </div>
+                        <input type="submit" value="Iniciar sesión" data-wait="Please wait..."
+                        class="submit-button resgistrarse w-button" />
+                        
+                </form>
+
+                <p>¿No tienes cuenta?</p>
+                 <a href="{% url 'register' %}" >Registrate</a>
+
+                <div class="w-form-done">
+                    <div>Thank you! Your submission has been received!</div>
+                </div>
+                <div class="w-form-fail">
+                    <div>Oops! Something went wrong while submitting the form.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section _2">
+        <div class="container">
+            <div class="w-dyn-list">
+                <div role="list" class="blog-list-wrap w-dyn-items">
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pq">
+        <div class="main-heading-wrap">
+            <h1 class="heading-2">¿Por qué usar InstaTool?</h1>
+        </div>
+        <div class="divider"></div>
+        <div class="w-layout-grid main-paragraph-wrap">
+            <div id="w-node-_64ce2765-ba80-b32a-8cf9-7f7589112e98-b73586cb" class="section-5 sect wf-section"><img src="https://uploads-ssl.webflow.com/63b45231759f2ed0473586b6/63b57aad13f0845b6b709a3e_freedom.png" loading="lazy" width="200" alt="" class="present" />
+                <p class="paragraph-light">Usar redes sociales sin estar presente.</p>
+            </div>
+            <div id="w-node-_64ce2765-ba80-b32a-8cf9-7f7589112e9c-b73586cb" class="section-4 sect wf-section"><img src="https://uploads-ssl.webflow.com/63b45231759f2ed0473586b6/63b57a49b7dd5c22409e4469_bars.png" loading="lazy" alt="" class="present" />
+                <p class="paragraph-light">Aumentar tus seguidores y ser más visible.<br />‍</p>
+            </div>
+            <div id="w-node-_64ce2765-ba80-b32a-8cf9-7f7589112ea2-b73586cb" class="section-5 sect wf-section"><img src="https://uploads-ssl.webflow.com/63b45231759f2ed0473586b6/63b57b66402c77576cb18dc0_system.png" loading="lazy" alt="" class="present" />
+                <p class="paragraph-light">Tener una mejor organización de tu contenido</p>
+            </div>
+        </div>
+    </div>
+
+{% include "section/footer.html" %}
+
+<!-- Firebase -->
+
+<script type="module" src="firebaseIndex.js"></script>
+</body>
+</html>

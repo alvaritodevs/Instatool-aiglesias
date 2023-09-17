@@ -1,0 +1,337 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://www.webflow.com --><!-- Last Published: Mon Jan 16 2023 10:01:51 GMT+0000 (Coordinated Universal Time) -->
+<html>
+
+{% include "section/head.html" %}   
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/micss.css' %}">
+
+<script src="{% static 'js/js.js' %}"></script>
+
+<body>
+
+{% include "section/header.html" %}   
+
+<style>
+
+.ventanaEmergente{
+
+position: absolute;
+top: 40%;
+left: 25%;
+width: 50%;
+height: 400px;
+z-index: 9999;
+background-color: white;
+border: 1px solid black;
+padding: 30px;
+display: none;
+flex-direction: column;
+justify-content:center ;
+
+}
+
+</style>
+
+
+<div class="section" id="cabeceraCalendar">
+    <div class="container cc-heading-wrap">
+
+
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }}!</p>
+    {% endif %}
+
+    {% if iglogin == "exito" %}
+    <div class="centrar">
+        <div class="instagradient">
+            <p>Has iniciado sesión de instagram con la cuenta: {{iguser}}</p><form action="{% url 'cerrarSesionIg' %}" method="post"> {% csrf_token %}<button type="submit" class="button "> Salir </button></form>
+        </div>
+    </div>
+    {% else %}
+    <div class="centrar">
+        <div class="instagradient">
+            <p>Inicia sesión en instagram para continuar </p><button onclick="showInstaLogin()" >Login</button>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+    </div>
+</div>
+
+
+{% if iglogin == "exito" %}
+
+    <div class="store-categories-wrap"><a href="{% url 'calendario' %}" aria-current="page"
+        class="products-category-link w--current ">Calendario post</a><a href="{% url 'homedatos' %}" aria-current="page"
+        class="products-category-link w--current activo">Datos</a><a href="{% url 'comentPage' %}"
+        aria-current="page" class="products-category-link w--current">Comentarios &amp; Likes
+        automáticos</a>
+        
+    </div> 
+
+    {% if error %}
+        {% include "alerts/errorInsta.html" %} 
+    {% else %}
+
+    {% endif %}  
+
+    <div class="caja-inicio-datos">
+        <h4>Información</h4>  
+        <div class="caja-inicio-informacion">
+         
+        <form action="{% url 'not_followers' %}" method="post">
+            {% csrf_token %}   
+
+        <div class="boxinfo">   
+        <p>Quién sigo y no me sigue</p>
+            
+            <button type="submit" class="buttonpri">Calcular</button>  
+        </div>  
+            
+            {% if usuariosNoSeguidores %}
+            <ul>
+                {% for usuario in usuariosNoSeguidores %}
+
+                    {% if not usuario %}
+                        <p>No hay</p>
+
+                    {% else %}
+                        <li>{{ usuario }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% else %}
+
+            {% endif %}
+
+        </form>
+
+        <form action="{% url 'not_following' %}" method="post">
+            {% csrf_token %}    
+            
+            <div class="boxinfo">  
+
+            <p>Quién me sigue y no le sigo</p> 
+            <button type="submit" class="buttonpri">Calcular</button>    
+
+            </div>
+
+            {% if usuariosNoSigo %}
+
+                <ul>
+                    {% for usuario in usuariosNoSigo %}
+    
+                        {% if not usuario %}
+                            <p>No hay</p>
+    
+                        {% else %}
+                            <li>{{ usuario }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+
+            {% else %}
+
+            {% endif %} 
+
+        </form>
+
+        <form action="{% url 'most_followed_followers' %}" method="post">
+            {% csrf_token %}    
+    
+            <div class="boxinfo">  
+
+            <p>Quién es mi seguidor con más seguidores</p>     
+            <button type="submit" class="buttonpri">Calcular</button>
+
+            </div>
+
+            {% if masSeguidoSeguidores %}
+                <br>
+                <p>{{masSeguidoSeguidores}} le siguen {{Seguidores}} usuarios</p>
+
+            {% else %}
+                
+            {% endif %}
+        </form>
+
+        <form action="{% url 'most_followed_following' %}" method="post">
+            {% csrf_token %}    
+    
+            <div class="boxinfo">  
+
+            <p>A quién sigo con más seguidores</p>
+            <button type="submit" class="buttonpri">Calcular</button>  
+            
+            </div>
+            
+            {% if masSeguidoSeguidos %}
+                <br>
+                <p>{{masSeguidoSeguidos}} le siguen {{Seguidores}} usuarios</p>
+
+            {% else %}
+                
+            {% endif %}
+        </form>
+
+
+        </div>
+
+        <h4>Foto de perfil</h4>  
+
+        <form action="{% url 'full_profile' %}" method="post" class="profileFullPic">
+            {% csrf_token %}    
+            <div class="fullPic">
+                <div class="left">
+                    <p>Ver foto de perfil completa</p> 
+                    <input type="text" name="usuarioPic" class="input">
+                    <button type="submit" class="buttonpri">Ver</button> 
+                </div> 
+                <div class="right">
+                    {% if usuarioPic %}
+
+                        <img src="{% static usuarioPic %}" alt="Image" width="100px">
+    
+                    {% else %}
+                        
+                    {% endif %}
+
+
+                </div>
+            </div>
+   
+            
+            {% if usuarioMasSeguido %}
+            <ul>
+                {% for usuario in usuariosNoseguidores %}
+
+                    {% if not usuario %}
+                        <p>No hay</p>
+                    {% else %}
+                        <li>{{ usuario }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% else %}
+
+            {% endif %}
+        </form>
+
+        <h4>Mi cuenta:</h4>  
+        
+        <form action="{% url 'todos_mis_datos' %}" method="post" class="profileFullPic">
+            {% csrf_token %} 
+            <p>Ver Información sobre mi cuenta: </p>
+
+            <input type="submit" value="Ver" class="buttonpri">
+
+        </form>
+
+
+        <style>
+
+            /* Table container */
+            .table-container {
+            width: 100%;
+            overflow-x: auto;
+            }
+
+            /* Table */
+            .table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            }
+
+            /* Table header */
+            .table thead th {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            }
+
+            /* Table body */
+            .table tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            }
+
+
+            /* Hover effect */
+            .table tbody tr:hover {
+            background-color: #e0e0e0;
+            cursor: pointer;
+            }
+
+        </style>
+
+
+        {% if misDatos %}
+
+        <div class="table-container">
+            <table class="table">
+
+              <tbody>
+                <tr>
+                  <td><b>Nombre de usuario:</b></td>
+                  <td>{{misDatos.username}}</td>
+
+                </tr>
+                <tr>
+                  <td><b>Nombre completo:</b></td>
+                  <td>{{misDatos.full_name}}</td>
+                </tr>
+                <tr>
+                    <td><b>Privacidad:</b></td>
+                    {% if misDatos.is_private == "False" %}
+                        <td>Cuenta pública</td>
+                    {% else %}
+                        <td>Cuenta privada</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td><b>Cumpleaños:</b></td>
+                    <td>{{misDatos.birthday}}</td>
+                </tr>
+                <tr>
+                    <td><b>Correo:</b></td>
+                    <td>{{misDatos.email}}</td>
+                </tr>
+                <tr>
+                    <td><b>Teléfono:</b></td>
+                    {% if misDatos.phone_number == "" %}
+                        <td>No hay teléfono vinculado </td>
+                    {% else %}
+                        <td>{{misDatos.phone_number}}</td>
+                    {% endif %}
+                    
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        {% else %}
+
+        {% endif %}
+
+
+
+    </div>
+{% else %}
+
+
+    
+{% endif %} 
+
+
+{% include "ventanas/ventanaLoginInsta.html" %}
+  
+{% include "section/footer.html" %}   
+
+    </body>
+</html>

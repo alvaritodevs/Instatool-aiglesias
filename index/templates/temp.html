@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "section/head.html" %}
+
+<body>
+{% include "section/header.html" %}
+
+    <div class="section cc-store-home-wrap home">
+        <div class="intro-header">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <div class="heading-jumbo">Bienvenido a YourMediaTool<br /></div>
+                    <div class="paragraph-bigger cc-bigger-light">Donde podrás tener el control total de tus publicaciones, crecer en redes sociales y además ahorrar tiempo.<br /></div>
+                </div><a href="{% url 'calendario' %}" class="button cc-white-button w-inline-block" id="botonLogin">
+                    <div>Unete</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section register">
+        <h1 class="heading-2 iniciarsesion">Iniciar sesion</h1>
+        <div class="container cc-heading-wrap register">
+            <div class="form-block-2 w-form">
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+            
+                <button type="submit">Log in</button>
+                
+                <form  method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <label for="name">Correo electrónico</label><input type="text" class="text-field-2 w-input"
+                        maxlength="256" name="username"  placeholder="" /><label for="email"
+                        class="field-label">Contraseña</label>
+                        
+                        <input type="password" class="text-field-4 w-input"
+                        maxlength="256" name="password" data-name="Email" placeholder="" required="" /><label for="name-2">O inica sesión con:</label>
+                    <div class="section-2 wf-section">
+                        <button id="botonLogin" class="submit-button google w-button">Google</button>
+                        <button class="submit-button facebook w-button">Facebook</button>
+                    </div>
+                    <label class="w-checkbox checkbox-field"><input type="checkbox" id="checkbox" name="checkbox"
+                            data-name="Checkbox" class="w-checkbox-input" /><span class="w-form-label" for="checkbox"><a
+                                href="https://help.habbo.es/hc/es/articles/360005259777-T%C3%A9rminos-y-Condiciones-del-Servicio"
+                                target="_blank">Acepto los Términos y Condiciones, la Política de Privacidad y la
+                                Política de Cookies</a></span></label><label class="w-checkbox"><input type="checkbox"
+                            id="checkbox-2" name="checkbox-2" data-name="Checkbox 2" class="w-checkbox-input" /><span
+                            class="w-form-label" for="checkbox-2">Deseo recibir promociones y novedades a mi
+                            correo</span></label><input type="submit" value="Iniciar sesión" data-wait="Please wait..."
+                        class="submit-button resgistrarse w-button" />
+                </form>
+
+                <div class="w-form-done">
+                    <div>Thank you! Your submission has been received!</div>
+                </div>
+                <div class="w-form-fail">
+                    <div>Oops! Something went wrong while submitting the form.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section _2">
+        <div class="container">
+            <div class="w-dyn-list">
+                <div role="list" class="blog-list-wrap w-dyn-items">
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                    <div role="listitem" class="blog-item w-dyn-item">
+                        <div class="blog-summary-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pq">
+        <div class="main-heading-wrap">
+            <h1 class="heading-2">¿Por qué usar boost?</h1>
+        </div>
+        <div class="divider"></div>
+        <div class="w-layout-grid main-paragraph-wrap">
+            <div id="w-node-_64ce2765-ba80-b32a-8cf9-7f7589112e98-b73586cb" class="section-5 sect wf-section"><img src="https://uploads-ssl.webflow.com/63b45231759f2ed0473586b6/63b57aad13f0845b6b709a3e_freedom.png" loading="lazy" width="200" alt="" class="present" />
+                <p class="paragraph-light">Usar redes sociales sin estar presente.</p>
+            </div>
+            <div id="w-node-_64ce2765-ba80-b32a-8cf9-7f7589112e9c-b73586cb" class="section-4 sect wf-section"><img src="https://uploads-ssl.webflow.com/63b45231759f2ed0473586b6/63b57a49b7dd5c22409e4469_bars.png" loading="lazy" alt="" class="present" />
+                <p class="paragraph-light">Aumentar tus seguidores y ser más visible.<br />‍</p>
+            </div>
+            <div id="w-node-_64ce2765-ba80-b32a-8cf9-7f7589112ea2-b73586cb" class="section-5 sect wf-section"><img src="https://uploads-ssl.webflow.com/63b45231759f2ed0473586b6/63b57b66402c77576cb18dc0_system.png" loading="lazy" alt="" class="present" />
+                <p class="paragraph-light">Tener una mejor organización de tu contenido</p>
+            </div>
+        </div>
+    </div>
+
+{% include "section/footer.html" %}
+
+<!-- Firebase -->
+
+<script type="module" src="firebaseIndex.js"></script>
+</body>
+</html>

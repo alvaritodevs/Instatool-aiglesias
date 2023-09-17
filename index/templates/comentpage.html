@@ -1,0 +1,189 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://www.webflow.com --><!-- Last Published: Mon Jan 16 2023 10:01:51 GMT+0000 (Coordinated Universal Time) -->
+<html>
+
+{% include "section/head.html" %}   
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/micss.css' %}">
+
+<script src="{% static 'js/js.js' %}"></script>
+
+<body>
+
+{% include "section/header.html" %}   
+
+<style>
+
+.ventanaEmergente{
+
+position: absolute;
+top: 40%;
+left: 25%;
+width: 50%;
+height: 400px;
+z-index: 9999;
+background-color: white;
+border: 1px solid black;
+padding: 30px;
+display: none;
+flex-direction: column;
+justify-content:center ;
+
+}
+
+
+</style>
+
+
+<div class="section" id="cabeceraCalendar">
+    <div class="container cc-heading-wrap">
+
+
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }}!</p>
+    {% endif %}
+
+    {% if iglogin == "exito" %}
+        <div class="centrar">
+            <div class="instagradient">
+                <p>Has iniciado sesión de instagram con la cuenta: {{iguser}}</p><form action="{% url 'cerrarSesionIg' %}" method="post"> {% csrf_token %}<button type="submit" class="button "> Salir </button></form>
+            </div>
+        </div>
+    {% else %}
+        <div class="centrar">
+            <div class="instagradient">
+                <p>Inicia sesión en instagram para continuar </p><button onclick="showInstaLogin()">Login</button>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+    </div>
+</div>
+
+
+    {% if iglogin == "exito" %}
+
+        <div class="store-categories-wrap"><a href="{% url 'calendario' %}" aria-current="page"
+            class="products-category-link w--current ">Calendario post</a><a href="{% url 'homedatos' %}" aria-current="page"
+            class="products-category-link w--current">Datos</a><a href="{% url 'comentPage' %}"
+            aria-current="page" class="products-category-link w--current activo">Comentarios &amp; Likes
+            automáticos</a>
+            
+        </div>
+        
+        {% if error %}
+            {% include "alerts/errorInsta.html" %} 
+        {% else %}
+
+        {% endif %}  
+
+        <div class="caja-inicio">
+            <div class="comentpage">
+
+            <div class="lefttop">
+                <h4>Comentar automáticamente en tu timeline</h4>
+                <form action="{% url 'commenTimeline' %}" method="post">
+                    {% csrf_token %}    
+                    <input type="text" name="comentario" placeholder="Comentario" class="input">
+                    <input type="submit" class="buttonpri" value="Comentar">
+
+                </form>
+
+            </div>
+
+            <div class="righttop">
+                <h4>Likear automáticamente en tu timeline</h4>
+                <form action="{% url 'likeTimeline' %}" method="post">
+                    {% csrf_token %}    
+    
+                    <input type="submit" class="buttonpri" value="Dar me gusta" >
+    
+                </form>
+            </div>
+
+
+            <div class="leftbotom">
+                <h4>Comentar automáticamente en un hashtag</h4>
+                <form action="{% url 'commentHashtag' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="comentario" placeholder="Comentario" class="input">    
+                    <input type="text" name="hashtag" class="input" placeholder="Hashtag">
+                    <input type="submit" class="buttonpri" value="Comentar">
+
+
+                </form>
+            </div>
+
+    
+            <div class="rightbotom">
+                <h4>Likear automáticamente en un hashtag</h4>
+                <form action="{% url 'likeHashtag' %}" method="post">
+                    {% csrf_token %}    
+                    <input type="text" name="hashtag" class="input" placeholder="Hashtag">
+                    <input type="submit" class="buttonpri" value="Dar me gusta">
+    
+    
+                </form>
+            </div>
+
+
+            <div class="leftbotom">
+                <h4>Seguir a usuarios de un hashtag</h4>
+                <form action="{% url 'followHashtag' %}" method="post">
+                    {% csrf_token %}    
+                    <input type="text" name="hashtag" class="input" placeholder="Hashtag">
+                    <input type="submit" class="buttonpri" value="Seguir">
+
+
+                </form>
+            </div>
+
+
+            </div>
+
+        <script src="https://uploads-ssl.webflow.com/63f7a8dc0861478628b98e6b/js/webflow.55831244f.js"
+            type="text/javascript"></script>
+
+        </div>
+
+    {% else %}
+
+
+    
+    {% endif %}
+
+
+
+    <div class="ventanaEmergente">
+                <div class="w-form">
+                    <form id="wf-form-DateTime" name="wf-form-DateTime" method="POST" action="guardarPost" enctype="multipart/form-data">
+                        {% csrf_token %}    
+
+                        <label for="date-time">Suba aquí el archivo.</label>
+                        <input type="file" name="imagen">
+                        <label for="date-time">Introduce el pie de foto.</label>                        
+                        <input type="text" name="piefoto">
+                        <div class="udesly-input-wrapper-2"><label for="date-time">¿Cuando lo quieres publicar?</label>
+                        <input type="text" class="udesly-text-field w-input" maxlength="256" name="fecha" data-name="date-time"
+                                placeholder="" id="date-time" data-type="datetime-local" />
+                        </div>
+
+                        <button type="button" onclick="closeEmergente()">Cerrar</button> <button type="submit" onclick="enviarPost()">Enviar</button></form>
+
+                    </form>
+
+                </div>
+    </div>   
+    
+    
+
+
+    {% include "ventanas/ventanaLoginInsta.html" %}
+ 
+
+    {% include "section/footer.html" %}   
+
+    </body>
+</html>

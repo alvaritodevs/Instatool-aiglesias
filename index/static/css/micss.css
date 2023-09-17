@@ -1,0 +1,229 @@
+.buttonsec{
+
+    padding: 10 10 10 10;
+}
+
+
+.logohead{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.logohead .heading-jumbo{
+    color: white;
+}
+
+
+.posts{
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    overflow: auto;
+    gap: 30px;
+
+}
+
+.post{
+    
+    width: auto;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background: linear-gradient(90deg, hsla(311, 74%, 87%, 1) 0%, hsla(275, 19%, 88%, 1) 100%);}
+
+.post .headerpost{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+
+}
+
+
+
+.post img{
+    object-fit: contain;  
+    width: 100%;  
+    border-radius: 10px;
+    max-height: 120px;
+}
+
+.post .botones{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.buttonpri {
+
+    /*
+    height: auto;
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: #0A1A3B;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+*/
+
+    padding: 6px 15px;
+    border-radius: 0px;
+    border: 1px solid #0A1A3B;
+    background-color: white;
+    -webkit-transition: background-color 400ms ease, opacity 400ms ease, color 400ms ease;
+    transition: background-color 400ms ease, opacity 400ms ease, color 400ms ease;
+    color: #0A1A3B;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+
+}
+  
+.input{
+    height: 35px;
+    border-radius: 4px;
+}
+
+.buttonpri:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.new-post{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.caja-inicio{
+
+    padding: 10px 40px 20px 40px;
+    background-color: lightblue;
+    width: 80%;
+    height: auto;
+
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    z-index: 1;
+    border-radius: 30px;
+    justify-content: space-between;
+    
+}
+
+.caja-inicio-datos{
+
+    padding: 20px 40px 60px 40px;
+    overflow: auto;
+    background-color: lightblue;
+    width: 80%;
+
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    z-index: 1;
+    border-radius: 30px;
+     
+}
+
+.caja-inicio-informacion{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+}
+
+
+.profileFullPic{
+    margin-bottom: 25px;
+}
+
+.fullPic{
+    display: block;
+    
+}
+
+.right{
+    margin-top: 10px;
+}
+
+.right img{
+    width: 200px;
+    border-radius: 10px;
+}
+
+.white{
+    color: white!important;
+}
+
+/*
+INDEX
+*/
+
+.centrar{
+    display: flex;
+    justify-content: center;
+}
+.instagradient{
+    gap: 10px;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    width: auto;
+    background: linear-gradient(90deg, hsla(311, 74%, 87%, 1) 0%, hsla(275, 19%, 88%, 1) 100%);
+}
+
+.instagradient button{
+    margin-bottom: 10px;
+}
+
+
+/*
+PAGINA REGISTER
+*/
+
+.section .register{
+    padding-bottom: 50px;
+}
+
+
+
+#cabeceraCalendar{
+
+    margin-bottom: 30px;
+}
+
+/*
+PAGINA DATOS
+*/
+.boxinfo{
+    
+    display: block;
+    flex-direction: column;
+    margin-right: 30px;
+    gap: 5px;
+}  
+
+
+
+.comentpage{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}

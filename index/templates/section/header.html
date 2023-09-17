@@ -1,0 +1,32 @@
+
+{% load static %}
+
+<div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation loged w-nav">
+    <div class="navigation-items"><div class="logohead"><a href="{% url 'inicio' %}" aria-current="page" class="logo-link w-nav-brand w--current"><img src="{% static 'img/Logo.png' %}" loading="lazy" width="50" alt="" /></a><div class="heading-jumbo">InstaTool</div></div>
+        <div class="navigation-wrap">
+            <nav role="navigation" class="navigation-items w-nav-menu"><a href="{% url 'acerca' %}" class="navigation-item w-nav-link blanco">Acerca de</a><a href="{% url 'contacto' %}" class="navigation-item w-nav-link">Contacto</a><a href="{% url 'inicio' %}" class="navigation-item w-nav-link">Inicio</a></nav>
+            <div class="menu-button w-nav-button"></div>
+
+            <div data-node-type="commerce-cart-wrapper" data-open-product="" data-wf-cart-type="rightSidebar" data-wf-cart-query="query Dynamo2 {
+
+" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper cart">
+
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink button cc-cart w-inline-block">
+                        <div class="text-block w-inline-block ">Cerrar sesión</div>
+                        <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22Number%22%2C%22filter%22%3A%7B%22type%22%3A%22numberPrecision%22%2C%22params%22%3A%5B%220%22%2C%22numberPrecision%22%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItemsCount%22%7D%7D%5D" class="w-commerce-commercecartopenlinkcount cart-quantity">0</div>
+                    </a>
+                {% else %}
+                    <a href="{% url 'register' %}" data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink button cc-cart w-inline-block">
+                        <div class="text-block w-inline-block">Únete</div>
+                        <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22Number%22%2C%22filter%22%3A%7B%22type%22%3A%22numberPrecision%22%2C%22params%22%3A%5B%220%22%2C%22numberPrecision%22%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItemsCount%22%7D%7D%5D" class="w-commerce-commercecartopenlinkcount cart-quantity">0</div>
+                    </a>
+                {% endif %}
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
